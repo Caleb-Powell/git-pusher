@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
+	"os/exec"
 )
 
 func main() {
@@ -16,7 +16,9 @@ func main() {
 	}
 
 	for _, file := range files {
-		fmt.Println(file.Name())
+		cmd := exec.Command("git", "push")
+		cmd.Dir = root + "/" + file.Name()
+		cmd.Run()
 	}
 
 	// err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
