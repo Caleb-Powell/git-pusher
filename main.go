@@ -2,23 +2,31 @@ package main
 
 import (
 	"fmt"
-	"os"
-	"path/filepath"
+	"io/ioutil"
 )
 
 func main() {
 
-	var files []string
-
 	root := "/home/caleb-powell/git"
-	err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
-		files = append(files, path)
-		return nil
-	})
+
+	files, err := ioutil.ReadDir(root)
+
 	if err != nil {
 		panic(err)
 	}
+
 	for _, file := range files {
-		fmt.Println(file)
+		fmt.Println(file.Name())
 	}
+
+	// err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
+	// 	files = append(files, path)
+	// 	return nil
+	// })
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// for _, file := range files {
+	// 	fmt.Println(file)
+	// }
 }
