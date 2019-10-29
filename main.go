@@ -31,6 +31,7 @@ func main() {
 	for _, file := range files {
 		cmd := exec.Command("git", "push")
 		cmd.Dir = *path + "/" + file.Name()
+		fmt.Println(*path)
 		cmd.Run()
 	}
 
