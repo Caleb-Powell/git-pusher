@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -20,8 +19,6 @@ func main() {
 
 	flag.Parse()
 
-	fmt.Println(*path)
-
 	files, err := ioutil.ReadDir(*path)
 
 	if err != nil {
@@ -31,7 +28,6 @@ func main() {
 	for _, file := range files {
 		cmd := exec.Command("git", "push")
 		cmd.Dir = *path + "/" + file.Name()
-		fmt.Println(*path)
 		cmd.Run()
 	}
 
