@@ -1,15 +1,28 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"io/ioutil"
+	"log"
+	"os"
 	"os/exec"
 )
 
 func main() {
+	pwd, err := os.Getwd()
 
-	root := "/home/caleb-powell/git"
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	files, err := ioutil.ReadDir(root)
+	path := flag.String("path", pwd, "This should be the directry where you hold all of your get repos. Default is the dir that it is running in.")
+
+	flag.Parse()
+
+	fmt.Println(*path)
+
+	files, err := ioutil.ReadDir(*path)
 
 	if err != nil {
 		panic(err)
@@ -17,7 +30,7 @@ func main() {
 
 	for _, file := range files {
 		cmd := exec.Command("git", "push")
-		cmd.Dir = root + "/" + file.Name()
+		cmd.Dir = *path + "/" + file.Name()
 		cmd.Run()
 	}
 
