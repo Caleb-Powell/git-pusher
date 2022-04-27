@@ -35,7 +35,9 @@ func main() {
 	}
 
 	for _, file := range files {
-		cmds.Run(conf.RepoPath + "/" + file.Name())
+		if file.IsDir() {
+			cmds.Run(conf.RepoPath + "/" + file.Name())
+		}
 	}
 }
 
