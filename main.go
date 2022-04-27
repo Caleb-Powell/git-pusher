@@ -24,7 +24,7 @@ func init() {
 
 func main() {
 	if !conf.Nested {
-		cmds.Run(conf.RepoPath)
+		cmds.Run(conf.RepoPath + "/" + ".")
 		return
 	}
 
