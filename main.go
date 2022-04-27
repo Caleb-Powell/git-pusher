@@ -24,7 +24,7 @@ func init() {
 
 func main() {
 	if !conf.Nested {
-		cmds.Run(conf.RepoPath + "/" + ".")
+		cmds.Run(conf.RepoPath + "/")
 		return
 	}
 
@@ -43,7 +43,11 @@ func getCommands() []*exec.Cmd {
 	cmds := []*exec.Cmd{}
 	cmtMsg := fmt.Sprintf("\"%s\"", conf.CommitMsg)
 
-	commitCmd := exec.Command("git", "commit", "-a", "-m", cmtMsg)
+	addCmd := exec.Command("git", "add", ".")
+
+	cmds = append(cmds, addCmd)
+
+	commitCmd := exec.Command("git", "commit", "-m", cmtMsg)
 
 	cmds = append(cmds, commitCmd)
 
